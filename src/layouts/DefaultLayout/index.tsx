@@ -6,7 +6,9 @@ export const DefaultLayout = () => {
   return (
     <S.LayoutContainer>
       <Header />
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
     </S.LayoutContainer>
   )
 }
