@@ -21,4 +21,37 @@ export const ProfileDetails = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+
+    h1 {
+      font-size: ${({ theme }) => theme.textSizes['title-title-l']};
+      color: ${({ theme }) => theme.colors['base-title']};
+      line-height: 130%;
+    }
+  }
+
+  ul {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: auto;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      svg {
+        width: 1.125rem;
+        height: 1.125rem;
+        color: ${({ theme }) => theme.colors['base-label']};
+      }
+    }
+  }
 `
