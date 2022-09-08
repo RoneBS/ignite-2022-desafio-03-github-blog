@@ -25,21 +25,17 @@ export const Blog = () => {
   const [posts, setPosts] = useState<IPost[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
-  const getPosts = useCallback(
-    async (query = '') => {
-      try {
-        setIsLoading(true)
-        const response = await api.get(
-          `/search/issues?q=${query}%20repo:${username}/${repoName}`
-        )
-        console.log(response.data)
-        setPosts(response.data.items)
-      } finally {
-        setIsLoading(false)
-      }
-    },
-    [posts]
-  )
+  const getPosts = useCallback(async (query = '') => {
+    try {
+      setIsLoading(true)
+      const response = await api.get(
+        `/search/issues?q=${query}%20repo:${username}/${repoName}`
+      )
+      setPosts(response.data.items)
+    } finally {
+      setIsLoading(false)
+    }
+  }, [])
 
   useEffect(() => {
     getPosts()
@@ -47,7 +43,7 @@ export const Blog = () => {
   return (
     <>
       <Profile />
-      <SearchInput />
+      <SearchInput getPosts={getPosts} />
       <S.PostListContainer>
         {posts.map((post) => (
           <Post key={post.number} post={post} />
