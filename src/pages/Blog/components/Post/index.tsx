@@ -1,17 +1,19 @@
+import { IPost } from '../../index'
+
 import * as S from './styles'
 
-export const Post = () => {
+type PostProps = {
+  post: IPost
+}
+
+export const Post = ({ post }: PostProps) => {
   return (
-    <S.PostContainer to="/post/1">
+    <S.PostContainer to={`/post/${post.number}`}>
       <div>
-        <strong>JavaScript data types and data structures</strong>
-        <span>Há 1 dia</span>
+        <strong>{post.title}</strong>
+        <span>{post.created_at}</span>
       </div>
-      <p>
-        Programming languages all have built-in data structures, but these often
-        differ from one language to another. This article attempts to list the
-        built-in data structures available in...{' '}
-      </p>
+      <p>{post.body}</p>
     </S.PostContainer>
   )
 }

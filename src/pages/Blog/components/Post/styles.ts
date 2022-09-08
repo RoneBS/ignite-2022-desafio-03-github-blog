@@ -25,23 +25,23 @@ export const PostContainer = styled(Link)`
       color: ${({ theme }) => theme.colors['base-title']};
       overflow: hidden;
       text-overflow: ellipsis;
-      display: --webkit-box;
-      --webkit-box-orient: vertical;
-      --webkit-line-clamp: 2;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
     }
-  }
 
-  span {
-    width: max-content;
-    font-size: ${({ theme }) => theme.textSizes['text-text-s']};
-    color: ${({ theme }) => theme.colors['base-span']};
+    span {
+      width: max-content;
+      font-size: ${({ theme }) => theme.textSizes['text-text-s']};
+      color: ${({ theme }) => theme.colors['base-span']};
+    }
   }
 
   p {
     overflow: hidden;
     text-overflow: ellipsis;
-    display: --webkit-box;
-    --webkit-box-orient: vertical;
-    --webkit-line-clamp: 4;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
   }
 `
