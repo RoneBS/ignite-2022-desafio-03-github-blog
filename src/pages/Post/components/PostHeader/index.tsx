@@ -7,9 +7,20 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate } from 'react-router-dom'
 import { ExternalLink } from '../../../../components/ExternalLink'
+import { Spinner } from '../../../../components/Spinner'
+import { IPost } from '../../../Blog'
+import { relativeDateFormatter } from '../../../../utils/formatter'
+
 import * as S from './styles'
 
-export const PostHeader = () => {
+type PostHeaderProps = {
+  postData: IPost
+  isLoading: boolean
+}
+
+export const PostHeader = ({ postData, isLoading }: PostHeaderProps) => {
+  const formattedDate = relativeDateFormatter(postData?.created_at)
+
   const navigate = useNavigate()
 
   const goBack = () => {
@@ -17,31 +28,42 @@ export const PostHeader = () => {
   }
   return (
     <S.PostHeaderConatiner>
-      <header>
-        <ExternalLink
-          as="button"
-          onClick={goBack}
-          icon={<FontAwesomeIcon icon={faChevronLeft} />}
-          text="Voltar"
-          variant="iconLeft"
-        />
-        <ExternalLink text="Ver no Github" href="#" target="_blank" />
-      </header>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <>
+          <header>
+            <ExternalLink
+              as="button"
+              onClick={goBack}
+              icon={<FontAwesomeIcon icon={faChevronLeft} />}
+              text="Voltar"
+              variant="iconLeft"
+            />
+            <ExternalLink
+              text="Ver no Github"
+              href={postData.html_url}
+              target="_blank"
+            />
+          </header>
 
-      <h1>JavaScript data types and data structures</h1>
-      <ul>
-        <li>
-          <FontAwesomeIcon icon={faGithub} />
-          cameronwll
-        </li>
-        <li>
-          <FontAwesomeIcon icon={faCalendar} />
-          Há um dia
-        </li>
-        <li>
-          <FontAwesomeIcon icon={faComment} />5 comentários
-        </li>
-      </ul>
+          <h1>{postData.title}</h1>
+          <ul>
+            <li>
+              <FontAwesomeIcon icon={faGithub} />
+              {postData.user.login}
+            </li>
+            <li>
+              <FontAwesomeIcon icon={faCalendar} />
+              {formattedDate}
+            </li>
+            <li>
+              <FontAwesomeIcon icon={faComment} />
+              {postData.comments} comentários
+            </li>
+          </ul>
+        </>
+      )}
     </S.PostHeaderConatiner>
   )
 }
