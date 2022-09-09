@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { Spinner } from '../../components/Spinner'
 import { api } from '../../services/api'
 import { IPost } from '../Blog'
+import { PostContent } from './components/PostContent'
 import { PostHeader } from './components/PostHeader'
 
 const username = import.meta.env.VITE_GITHUB_USERNAME
@@ -36,6 +37,7 @@ export const Post = () => {
       ) : (
         <PostHeader postData={postData} isLoading={isLoading} />
       )}
+      {!isLoading && <PostContent content={postData.body} />}
     </>
   )
 }
